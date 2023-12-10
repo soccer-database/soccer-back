@@ -17,7 +17,7 @@ spring:
       ddl-auto: update
   datasource:
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:p6spy:mysql://0.tcp.jp.ngrok.io:3306/soccer?rewriteBatchedStatements=true
+    url: jdbc:p6spy:mysql://localhost:3306/soccer?rewriteBatchedStatements=true
     username: root
     password: 661899
 decorator:
@@ -27,3 +27,7 @@ decorator:
       multiline: true
       logging: slf4j
       tracing.include-parameter-values: true
+
+springdoc:
+  paths-to-match: /**
+  use-fqn: true

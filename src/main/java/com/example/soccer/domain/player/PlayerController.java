@@ -4,6 +4,7 @@ import com.example.soccer.CsvParser;
 import com.example.soccer.domain.classes.Player;
 import com.example.soccer.domain.classes.PlayerDetail;
 import com.example.soccer.domain.classes.PlayerRecordType;
+import com.example.soccer.domain.classes.SquadName;
 import com.example.soccer.domain.classes.stat.PlayerRecord;
 import com.example.soccer.domain.player.model.PlayerDto.PostBulk;
 import com.example.soccer.domain.player.record.PlayerRecordService;
@@ -13,6 +14,7 @@ import com.example.soccer.entity.PositionEntity;
 import com.example.soccer.entity.SquadEntity;
 import com.example.soccer.entity.stat.PlayerRecordEntity;
 import com.example.soccer.entity.stat.StandardPlayerRecordEntity;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
@@ -40,11 +42,13 @@ class PlayerController {
     private final PlayerRecordService recordService;
 
     @GetMapping
-    public List<Player> getPlayers(@NotNull String squadName) {
-        return playerService.getPlayersBy(squadName);
+    @Operation(summary = "팀 이름에 따른 선수목록 조회")
+    public List<Player> getPlayers(@NotNull SquadName squadName) {
+        return playerService.getPlayersBy(squadName.name);
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "선수 상세정보 조회 (기록 제외)")
     public PlayerDetail getPlayerDetail(@PathVariable Long id) {
         return playerService.getPlayerDetailBy(id);
     }
@@ -58,6 +62,7 @@ class PlayerController {
     }
 
     @GetMapping("{id}/records")
+    @Operation(summary = "선수 depend, GK, shoot, pass, standard 기록 조회")
     public PlayerRecord getRecordByType(PlayerRecordType type, @PathVariable Long id) {
         return recordService.getPlayerRecordBy(id, type);
     }

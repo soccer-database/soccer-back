@@ -1,6 +1,7 @@
 package com.example.soccer.domain.squad;
 
 import com.example.soccer.domain.classes.SquadDetail;
+import com.example.soccer.domain.classes.SquadName;
 import com.example.soccer.domain.squad.model.SquadDto.BulkPatch;
 import com.example.soccer.entity.SquadEntity;
 import jakarta.validation.Valid;
@@ -23,8 +24,9 @@ class SquadController {
     private final SquadMapper mapper = SquadMapper.INSTANCE;
 
     @GetMapping("{name}")
-    public SquadDetail getDetail(@PathVariable @NotNull String name) {
-        return service.getSquadDetailBy(name);
+    public SquadDetail getDetail(@PathVariable @NotNull SquadName name) {
+        System.out.println("name = " + name.name);
+        return service.getSquadDetailBy(name.name);
     }
 
     @PatchMapping("bulk")
