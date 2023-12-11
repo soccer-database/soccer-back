@@ -26,7 +26,7 @@ public class PlayerService {
     private final SquadService squadService;
 
     public List<Player> getPlayersBy(String squad) {
-        List<PlayerEntity> players = playerRepository.findBySquad_NameOrderByBackNumber(
+        List<PlayerEntity> players = playerRepository.findBySquad_NameAndBackNumberIsNotNullOrderByBackNumber(
             squad);
         Map<Long, Set<PlayerPositionEntity>> positionMap = playerPositionService.getPositionBy(
             players.stream().map(PlayerEntity::getId).toList());

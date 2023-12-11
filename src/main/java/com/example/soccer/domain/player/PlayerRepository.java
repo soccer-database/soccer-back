@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 interface PlayerRepository extends JpaRepository<PlayerEntity, Long> {
 
-    List<PlayerEntity> findBySquad_NameOrderByBackNumber(String squad_name);
+    List<PlayerEntity> findBySquad_NameAndBackNumberIsNotNullOrderByBackNumber(String squad_name);
 
     PlayerEntity findBySquad_NameAndName(String squad_name, String name);
 }
