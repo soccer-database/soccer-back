@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalHandler {
     @ExceptionHandler(RuntimeException.class)
     public CustomException handleRuntimeException(RuntimeException e) {
+        e.printStackTrace();
         return new CustomException(500, e.getMessage());
     }
 }
